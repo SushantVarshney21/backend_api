@@ -4,13 +4,24 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allow specific methods
+  })
+);
+
+
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+
+
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
